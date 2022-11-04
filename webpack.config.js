@@ -2,6 +2,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 /**
  * @type {import('webpack').Configuration}
  */
@@ -57,6 +58,15 @@ module.exports = {
 		],
 	},
 	plugins: [
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: path.resolve(__dirname, 'public'),
+					to: './public',
+					toType: 'dir',
+				},
+			],
+		}),
 		new HtmlWebpackPlugin({
 			template: path.join(__dirname, './public/index.html'),
 			filename: 'index.html',
